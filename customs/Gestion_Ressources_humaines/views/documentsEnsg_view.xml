@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rh_document_view_form" model="ir.ui.view">
+        <field name="name">ensaf.document.enseignant.form</field>
+        <field name="model">ensaf.document.enseignant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="enseignant"></field>
+                        <field name="nomAr"></field>
+                        <field name="prenomAr"></field>
+                        <field name="nom"></field>
+                        <field name="documents"></field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="rh_document_view_tree" model="ir.ui.view">
+        <field name="name">ensaf.document.enseignant.tree</field>
+        <field name="model">ensaf.document.enseignant</field>
+        <field name="arch" type="xml">
+            <tree string="list des documents">
+                <field name="nomAr"></field>
+                <field name="prenomAr"></field>
+                <field name="nom"></field>
+                <field name="documents"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="rh_enseignant_document_view_search" model="ir.ui.view">
+        <field name="name">ensaf.document.enseignant.search</field>
+        <field name="model">ensaf.document.enseignant</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Enseignant" name="enseignant" context="{'group_by':'enseignant'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_personnel_document_enseignant" model="ir.actions.act_window">
+        <field name="name">Document enseignant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ensaf.document.enseignant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Creér un nouveau Document !
+            </p>
+        </field>
+
+    </record>
+
+    <menuitem id="rh_menu_document_enseignant"
+              name="Document"
+              action="action_personnel_document_enseignant"
+              parent="rh_menu_personnel"
+              sequence="0"/>
+
+</odoo>

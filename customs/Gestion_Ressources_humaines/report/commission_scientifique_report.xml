@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="commission_scientifique" model="ir.actions.report">
+        <field name="name">PV Commission scientifique</field>
+        <field name="model">ensaf.comite</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Gestion_Ressources_humaines.commission_scientifique</field>
+        <field name="report_file">Gestion_Ressources_humaines.commission_scientifique</field>
+        <field name="print_report_name">'commission scientifique'</field>
+        <field name="binding_model_id" ref="model_ensaf_comite"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="commission_scientifique">
+        <t t-call="web.html_container">
+            <t t-call="Gestion_Ressources_humaines.weblearns_layout">
+                <t t-foreach="docs.sorted(key=lambda r: r.id)" t-as="o">
+                    <p style="text-align: center; font-weight: bold; ">محضر اجتماع اللجنة العلمية للمؤسسة
+                    </p>
+                    <p style="text-align: justify; direction: rtl; ">بناءا على المرسوم رقم 2-96-793 بتاريخ 11 شوال 1417
+                        موافق 19 فبراير 1997
+                        بمثابة النظام الأساسي الخاص برجال التعليم الباحثين في التعليم العالي؛
+                        وتطبيقا لمقتضيات المرسوم رقم 2.01.2329 صادر في 22 ربيع الأول 1423 (4 يونيو 2002) بتحديد تأليف
+                        وسير
+                        اللجنة العلمية للمؤسسة الجامعية وكذا كيفيات تعيين وانتخاب أعضائها؛
+                    </p>
+                    <p style="text-align: justify; direction: rtl; ">
+                        اجتمعت اللجنة العلمية للمدرسة الوطنية للعلوم التطبيقية بفاس بتاريخ
+                        <span t-esc="o.datecomite"/>
+                        قصد البث في اقتراح
+                        <span t-esc="o.get_type_arab(o.type)"/>
+                        في إطار
+                        <span t-esc="o.get_grad_arab(o.grade)"/>
+                        درجة
+                        <span t-esc="o.get_categori_arab(o.categorie)"/>
+                        الرتبة
+                        <span t-esc="o.echelon"/>
+                        الخاص ب
+                        :
+                    </p>
+                    <table style="width: 100%; ">
+                        <tr>
+                            <t t-foreach="o.split_table(o.enseignant_ids)" t-as='record'>
+
+                                <td>
+                                    <t t-foreach="record" t-as='line'>
+
+                                        <p style="text-align: justify; direction: rtl; ">
+                                            -
+                                            <span t-esc="line.nomAr"/>
+                                            <span t-esc="line.prenomAr"/>
+                                        </p>
+
+                                    </t>
+                                </td>
+
+                            </t>
+                        </tr>
+                    </table>
+
+                    <p style="text-align: center; font-weight: bold; ">أعضاء اللجنة العلمية:
+                    </p>
+
+                    <table class="table table-bordered" style="border: 1px solid black;">
+                        <thead>
+                            <tr style="text-align: center; border: 1px solid black;">
+                                <th style="border: 1px solid black;">التوقيــع</th>
+                                <th style="border: 1px solid black;">الصفــة</th>
+                                <th style="border: 1px solid black;">الاسـم والنـسب</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.membre_id_ids" t-as='record'>
+                                <t t-foreach="record" t-as='line'>
+                                    <tr style="text-align: center; border: 1px solid black;">
+                                        <td style="border: 1px solid black;"></td>
+                                        <td style="border: 1px solid black;">
+                                            <span t-esc="o.get_activite_arab(line.activ,line.grade)"/>
+                                        </td>
+                                        <td style="border: 1px solid black;">
+                                            <span t-esc="line.nomAr"/>
+                                            <span t-esc="line.prenomAr"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

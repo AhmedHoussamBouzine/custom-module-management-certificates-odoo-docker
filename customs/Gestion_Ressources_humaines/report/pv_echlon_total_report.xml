@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pv_echlon_total" model="ir.actions.report">
+        <field name="name">PV echlon promotion</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Gestion_Ressources_humaines.pv_echlon_total</field>
+        <field name="report_file">Gestion_Ressources_humaines.pv_echlon_total</field>
+        <field name="print_report_name">'Promostion enseignant'</field>
+        <field name="binding_model_id" ref="model_ensaf_enseignant"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="pv_echlon_total">
+        <t t-call="web.html_container">
+
+            <t t-call="Gestion_Ressources_humaines.weblearns_layout">
+
+                <p style="text-align: center; font-weight: bold; ">اقتراحات الترقي في الرتبة
+                </p>
+                <t t-foreach="docs" t-as="o">
+                    <p style="text-align:right;">الإطــــار:
+                        <span t-esc="o.get_grad_arab(o.grade)"/>
+                    </p>
+                    <p style="text-align:right;">الدرجة:
+                        <span t-esc="o.get_categori_arab(o.categorie)"/>
+                    </p>
+                    <p style="text-align:right;">
+                        <span t-esc="o.get_echlon(o.echelon,o.categorie,o.grade)"/>
+                        الترقية من
+                        <span t-esc="o.echelon"/>
+                        إلى الرتبة
+
+                    </p>
+
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th colspan="3">الوضعية المقترحة</th>
+                                <th colspan="3">الوضعية الحالية</th>
+                                <th rowspan="2">الاسم والنسب</th>
+                                <th rowspan="2">رقم التأجير</th>
+                            </tr>
+                            <tr>
+                                <th>تاريخ المفعول</th>
+                                <th>ر.ا</th>
+                                <th>الرتبة</th>
+                                <th>تاريخ المفعول</th>
+                                <th>ر.ا</th>
+                                <th>الرتبة</th>
+                            </tr>
+                        </thead>
+
+
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <span t-esc="o.get_dat_affictation_ech(o.dateEffetEchel)"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.get_echlon_indice(o.echelon,o.categorie,o.grade)"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.get_echlon(o.echelon,o.categorie,o.grade)"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.dateEffetEchel"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.indiceActu"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.echelon"/>
+                                </td>
+                                <td style="text-align: center">
+                                    <span t-esc="o.prenomAr"/>
+                                    <span t-esc="o.nomAr"/>
+                                </td>
+                                <td>
+                                    <span t-esc="o.som"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

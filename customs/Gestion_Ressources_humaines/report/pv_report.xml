@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pv_report" model="ir.actions.report">
+        <field name="name">PV report</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Gestion_Ressources_humaines.report_pv</field>
+        <field name="report_file">Gestion_Ressources_humaines.report_pv</field>
+        <field name="print_report_name">'Promostion enseignant'</field>
+        <field name="binding_model_id" ref="model_ensaf_enseignant"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="report_pv">
+        <t t-call="web.html_container">
+
+            <t t-call="Gestion_Ressources_humaines.weblearns_layout">
+                <t t-set="i" t-value="docs[0].echelon"/>
+
+
+                <p style="text-align: center; font-weight: bold; font-size: 25px;">اقتراحات الترقي في الرتبة</p>
+                <p style="text-align:right;">الإطــــار:
+                    <span t-esc="docs[0].get_grad_arab(docs[0].grade)"/>
+                </p>
+                <p style="text-align:right;">الدرجة:
+                    <span t-esc="docs[0].get_categori_arab(docs[0].categorie)"/>
+                </p>
+                <p style="text-align:right;">
+                    <span t-esc="i+1"/>
+                    الترقية من
+                    الرتبة
+                    <span t-esc="i"/>
+                    إلى الرتبة
+
+                </p>
+                <table class="table table-bordered" style="border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th colspan="3" style="border: 1px solid black; text-align: center;">الوضعية المقترحة</th>
+                            <th colspan="3" style="border: 1px solid black; text-align: center;">الوضعية الحالية</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center;">الاسم والنسب</th>
+                            <th rowspan="2" style="border: 1px solid black; text-align: center;">رقم التأجير</th>
+                        </tr>
+                        <tr>
+                            <th style="border: 1px solid black; text-align: center;">تاريخ المفعول</th>
+                            <th style="border: 1px solid black; text-align: center;">ر.ا</th>
+                            <th style="border: 1px solid black; text-align: center;">الرتبة</th>
+                            <th style="border: 1px solid black; text-align: center;">تاريخ المفعول</th>
+                            <th style="border: 1px solid black; text-align: center;">ر.ا</th>
+                            <th style="border: 1px solid black; text-align: center;">الرتبة</th>
+                        </tr>
+                    </thead>
+
+                    <t t-foreach="docs" t-as="o">
+                        <tbody>
+                            <tr>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.get_dat_affictation_ech(o.dateEffetEchel)"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.get_echlon_indice(o.echelon,o.categorie,o.grade)"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.get_echlon(o.echelon,o.categorie,o.grade)"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.dateEffetEchel"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.indiceActu"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.echelon"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.prenomAr"/>
+                                    <span t-esc="o.nomAr"/>
+                                </td>
+                                <td style="border: 1px solid black; text-align: center;">
+                                    <span t-esc="o.som"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </t>
+                </table>
+
+
+                <table style="width: 100%;">
+                    <tbody>
+                        <tr style="text-align: center; height: 60px; font-weight: bold;">
+                            <th>رئيس الجامعة</th>
+                            <th></th>
+                            <th>رئيس المؤسسة</th>
+                        </tr>
+                        <tr style="text-align: center; height: 60px; font-weight: bold;">
+                            <td colspan="3">أعضاء اللجنة الإدارية</td>
+                        </tr>
+                        <tr style="text-align: center; height: 60px; font-weight: bold;">
+                            <td>ممثلو الإدارة</td>
+                            <td></td>
+                            <td>ممثلو الموظفين</td>
+                        </tr>
+                        <tr style="text-align: right; height: 60px; font-weight: bold;">
+                            <td>-</td>
+                            <td></td>
+                            <td>-</td>
+                        </tr>
+                        <tr style="text-align: right; height: 60px; font-weight: bold;">
+                            <td>-</td>
+                            <td></td>
+                            <td>-</td>
+                        </tr>
+                        <tr style="text-align: right; height: 60px; font-weight: bold;">
+                            <td>-</td>
+                            <td></td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rh_enseignant_view_form" model="ir.ui.view">
+        <field name="name">date.presidence.wizard.form</field>
+        <field name="model">date.presidence.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <field name="datePresid"></field>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_personnel_parametre" model="ir.actions.act_window">
+        <field name="name">personnel parametre</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">date.presidence.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="pv_grade" model="ir.actions.report">
+        <field name="name">PV grade</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Gestion_Ressources_humaines.pv_grade</field>
+        <field name="report_file">Gestion_Ressources_humaines.pv_grade</field>
+        <field name="print_report_name">'Promostion enseignant'</field>
+        <field name="binding_model_id" ref="model_ensaf_enseignant"/>
+        <field name="binding_type">report</field>
+    </record>
+    <template id="weblearns_layout">
+        <div class="header">
+            <div class="text-center">
+                <img src="/Gestion_Ressources_humaines/static/report/header.png" alt="image is not loading ..."
+                     height="99" width="900"
+                />
+            </div>
+        </div>
+
+        <div class="article o_report_layout_standard">
+            <t t-out="0"/>
+        </div>
+
+        <div class="footer o_standard_footer">
+            <div class="text-center" style="border-top: 2px solid black;">
+                <img src="/Gestion_Ressources_humaines/static/report/footer.png" alt="image is not loading ..."
+                     height="50" width="1137"
+                />
+            </div>
+        </div>
+    </template>
+
+    <template id="pv_grade">
+        <t t-call="web.html_container">
+            <t t-call="Gestion_Ressources_humaines.weblearns_layout">
+                <t t-foreach="docs" t-as="o">
+                    <page>
+                        <span style="display: block; text-align: center; font-weight: bold; font-size: 19px;">اقتراح
+                            بتسوية وضعية رجال التعليم الباحثين
+                        </span>
+                        <p style="text-align: center; ">طبقا لمقتضيات المرسوم رقم 2.96.793 الصادر في11 من شوال 1417 (19
+                            فبراير 1997)
+                            بمثابة النظام الأساسي الخاص بهيأة الأساتذة الباحثين بالتعليم العالي كما تم تغييره وتتميمه
+                        </p>
+                        <table class="table table-bordered" style="width: 100%; height: 60%; border: 1px solid black;">
+                            <tbody>
+                                <tr>
+                                    <th style="border: 1px solid black;">
+                                        <div style="text-align: right;">
+                                            <span t-esc="o.cin"/>:
+                                            رقم التأجير:
+                                            <span style="margin-left: 30px;" t-esc="o.som"/>
+                                            ر.ب.ت.و
+                                        </div>
+                                    </th>
+                                    <th style="text-align: right; border: 1px solid black;">
+
+                                        :الاسم العائلي والشخصي باللغة العربية والفـرنسية
+                                        <br>
+                                        </br>
+
+                                        <span style="margin-right: 30px;margin-left: 30px;">
+                                            <span t-esc="o.nomFr"/>
+                                            <span t-esc="o.prenomFr"/>
+                                        </span>
+                                        <span style="margin-right: 30px;margin-left: 30px;">
+                                            <span t-esc="o.nomAr"/>
+                                            <span t-esc="o.prenomAr"/>
+                                        </span>
+
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th style="border: 1px solid black;">
+                                        <p style="text-align:right;">: الترسيم في إطار</p>
+                                        <p style="text-align: right; margin-bottom: 10px;">
+                                            <span style="margin-right: 30px;margin-left: 30px;">الـرتبــــة:</span>
+                                            <span style="margin-right: 90px;margin-left: 30px;">ر.ا:</span>
+                                            <span style="margin-left: 30px;margin-right: 30px;">ابتداء من</span>
+                                        </p>
+                                        <p style="text-align: right; margin-bottom: 10px;">
+                                            <span style="margin-right: 30px;margin-left: 30px;">الترقية إلى الرتبة:
+                                            </span>
+                                            <span style="margin-right: 30px;margin-left: 30px;">ر.ا:</span>
+                                            <span style="margin-left: 30px;margin-right: 30px;">ابتداء من</span>
+                                        </p>
+                                        <p style="text-align:right;">
+                                            التسمية في إطار:
+                                            <span t-esc="o.get_grade_affec(o.grade)"/>
+                                            <span style="margin-left: 30px;margin-right: 30px;">الدرجة:
+                                                <span t-esc="o.get_grad_categorie(o.indiceActu,o.grade)"/>
+                                            </span>
+                                        </p>
+                                        <p style="text-align:right;">
+                                            الـرتبــــة:
+                                            <span t-esc="o.get_grad_echlon(o.indiceActu,o.grade)"/>
+                                            <span style="margin-left: 50px;margin-right: 50px;">
+                                                ر.ا:
+                                                <span t-esc="o.get_grad_indic(o.indiceActu,o.grade)"/>
+                                            </span>
+                                            ابتداء من:
+                                            <span t-esc="o.dateDeligib"/>
+                                        </p>
+                                    </th>
+                                    <th style="border: 1px solid black;">
+                                        <p style="text-align:right;">الإطــــار:
+                                            <span t-esc="o.get_grad_arab(o.grade)"/>
+                                        </p>
+                                        <p style="text-align:right;">الدرجة:
+                                            <span t-esc="o.get_categori_arab(o.categorie)"/>
+                                        </p>
+                                        <p style="text-align:right;">المؤسسـة:
+                                            المدرسة الوطنية للعلوم التطبيقية بفاس
+                                        </p>
+                                        <p style="text-align: right; margin-bottom: 10px;">
+                                            <span>الـرتبــــة:
+                                                <span t-esc="o.echelon"/>
+                                            </span>
+                                            <span style="margin-right: 40px;">ر.ا:
+                                                <span t-esc="o.indiceActu"/>
+                                            </span>
+                                        </p>
+                                        <p style="text-align:right;">ابتداء من:
+                                            <span t-esc="o.dateEffetEchel"/>
+                                        </p>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <table style="width: 100%;">
+                            <tbody>
+                                <tr style="text-align: center; height: 40px; font-weight: bold;">
+                                    <th>رئيس الجامعة</th>
+                                    <th></th>
+                                    <th>رئيس المؤسسة</th>
+                                </tr>
+                                <tr style="text-align: center; height: 40px; font-weight: bold;">
+                                    <td colspan="3">أعضاء اللجنة الإدارية</td>
+                                </tr>
+                                <tr style="text-align: center; height: 40px; font-weight: bold;">
+                                    <td>ممثلو الإدارة</td>
+                                    <td></td>
+                                    <td>ممثلو الموظفين</td>
+                                </tr>
+                                <tr style="text-align: right; height: 40px; font-weight: bold;">
+                                    <td>-</td>
+                                    <td></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr style="text-align: right; height: 40px; font-weight: bold;">
+                                    <td>-</td>
+                                    <td></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr style="text-align: right; height: 40px; font-weight: bold;">
+                                    <td>-</td>
+                                    <td></td>
+                                    <td>-</td>
+                                </tr>
+                                <tr style="text-align: right; height: 40px; font-weight: bold;">
+                                    <td>-</td>
+                                    <td></td>
+                                    <td>-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                    </page>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

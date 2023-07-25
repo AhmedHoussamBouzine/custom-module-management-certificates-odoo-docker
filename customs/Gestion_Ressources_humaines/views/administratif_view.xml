@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rh_administratif_form_tree" model="ir.ui.view">
+        <field name="name">ensaf.administratif.tree</field>
+        <field name="model">ensaf.administratif</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <field name="som"></field>
+                    <field name="cin"></field>
+                    <field name="nomFr"></field>
+                    <field name="prenomFr"></field>
+                    <field name="nomAr"></field>
+                    <field name="prenomAr"></field>
+                    <field name="dateRecru"></field>
+                    <field name="dateInst"></field>
+                    <field name="grade"></field>
+                    <field name="categorie"></field>
+                    <field name="dateEffetGr"></field>
+                    <field name="echelon"></field>
+                    <field name="dateEffetEchel"></field>
+                    <field name="indiceActu"></field>
+                    <field name="situationPro"></field>
+
+                    <field name="diplome"></field>
+                    <field name="specialiteDiplome"></field>
+                    <field name="activite"></field>
+                    <field name="position"></field>
+                    <field name="fonction"></field>
+                    <field name="dateNaissance"></field>
+                    <field name="lieuNaissance"></field>
+                    <field name="situationFamiliale"></field>
+                    <field name="nbreEnfants"></field>
+                    <field name="adresse"></field>
+                    <field name="emailPerso"></field>
+                    <field name="emailAcademique"></field>
+                    <field name="tele"></field>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="rh_administratif_view_tree" model="ir.ui.view">
+        <field name="name">ensaf.administratif.tree</field>
+        <field name="model">ensaf.administratif</field>
+        <field name="arch" type="xml">
+            <tree string="list des administratifs">
+                <field name="som"></field>
+                <field name="cin"></field>
+                <field name="nomFr"></field>
+                <field name="prenomFr"></field>
+                <field name="nomAr"></field>
+                <field name="prenomAr"></field>
+                <field name="dateRecru"></field>
+                <field name="dateInst"></field>
+                <field name="grade"></field>
+                <field name="categorie"></field>
+                <field name="dateEffetGr"></field>
+                <field name="echelon"></field>
+                <field name="dateEffetEchel"></field>
+                <field name="indiceActu"></field>
+                <field name="situationPro"></field>
+
+                <field name="diplome"></field>
+                <field name="specialiteDiplome"></field>
+                <field name="activite"></field>
+                <field name="position"></field>
+                <field name="fonction"></field>
+                <field name="dateNaissance"></field>
+                <field name="lieuNaissance"></field>
+                <field name="situationFamiliale"></field>
+                <field name="nbreEnfants"></field>
+                <field name="adresse"></field>
+                <field name="emailPerso"></field>
+                <field name="emailAcademique"></field>
+                <field name="tele"></field>
+            </tree>
+        </field>
+    </record>
+    <record id="action_personnel_administratif" model="ir.actions.act_window">
+        <field name="name">Administratif</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ensaf.administratif</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Creér un nouveau Administratif !
+            </p>
+        </field>
+
+    </record>
+
+    <menuitem id="rh_menu_administratif"
+              name="Administratifs"
+              action="action_personnel_administratif"
+              parent="rh_menu_personnel"
+              sequence="0"/>
+
+</odoo>

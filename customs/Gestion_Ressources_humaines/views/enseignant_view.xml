@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rh_enseignant_view_form" model="ir.ui.view">
+        <field name="name">ensaf.enseignant.form</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="som"></field>
+                        <field name="originPost"></field>
+                        <field name="specialitePost"></field>
+                        <field name="cin"></field>
+                        <field name="nomFr"></field>
+                        <field name="prenomFr"></field>
+                        <field name="nomAr"></field>
+                        <field name="type"></field>
+                        <field name="prenomAr"></field>
+                        <field name="dateRecru"></field>
+                        <field name="dateInst"></field>
+                        <field name="grade"></field>
+                        <field name="datePA"></field>
+                        <field name="datePH"></field>
+                        <field name="datePES"></field>
+                        <field name="statut"></field>
+                        <field name="categorie"></field>
+                        <field name="dateEffetGr"></field>
+                        <field name="echelon"></field>
+                        <field name="dateEffetEchel"></field>
+                        <field name="indiceActu"></field>
+                        <field name="situationPro"></field>
+                        <field name="dateProposition"></field>
+                        <field name="diplome"></field>
+                        <field name="specialiteDiplome"></field>
+                        <field name="departement"></field>
+                        <field name="activite"></field>
+                        <field name="position"></field>
+                        <field name="fonction"></field>
+                        <field name="dateNaissance"></field>
+                        <field name="lieuNaissance"></field>
+                        <field name="situationFamiliale"></field>
+                        <field name="nbreEnfants"></field>
+                        <field name="adresse"></field>
+                        <field name="emailPerso"></field>
+                        <field name="emailAcademique"></field>
+                        <field name="tele"></field>
+                    </group>
+                    <group>
+                        <field name="dateDeligib"></field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="rh_enseignant_view_tree" model="ir.ui.view">
+        <field name="name">ensaf.enseignant.tree</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="arch" type="xml">
+            <tree string="list des Enseignant">
+                <header>
+                    <button string="Calculer" name="notification" type="object" class="oe_highlight"
+                            attrs="{'always_visible': True}"/>
+                    <button string="Actualiser" name="%(Gestion_Ressources_humaines.action_personnel_parametre)d"
+                            type="action" class="oe_highlight"
+                            attrs="{'always_visible': True}"/>
+                </header>
+                <field name="som"></field>
+                <field name="originPost"></field>
+                <field name="specialitePost"></field>
+                <field name="cin"></field>
+                <field name="nomFr"></field>
+                <field name="prenomFr"></field>
+                <field name="nomAr"></field>
+                <field name="prenomAr"></field>
+                <field name="system"></field>
+                <field name="dateRecru"></field>
+                <field name="dateInst"></field>
+                <field name="grade"></field>
+                <field name="datePA"></field>
+                <field name="datePH"></field>
+                <field name="datePES"></field>
+                <field name="statut"></field>
+                <field name="categorie"></field>
+                <field name="dateEffetGr"></field>
+                <field name="echelon"></field>
+                <field name="dateEffetEchel"></field>
+                <field name="indiceActu"></field>
+                <field name="situationPro"></field>
+                <field name="dateProposition"></field>
+                <field name="diplome"></field>
+                <field name="specialiteDiplome"></field>
+                <field name="departement"></field>
+                <field name="activite"></field>
+                <field name="position"></field>
+                <field name="fonction"></field>
+                <field name="dateNaissance"></field>
+                <field name="lieuNaissance"></field>
+                <field name="situationFamiliale"></field>
+                <field name="nbreEnfants"></field>
+                <field name="adresse"></field>
+                <field name="emailPerso"></field>
+                <field name="emailAcademique"></field>
+                <field name="tele"></field>
+                <field name="employee_id"/>
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="rh_enseignant_view_search" model="ir.ui.view">
+        <field name="name">ensaf.enseignant.search</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="nomFr" filter_domain="['|', ('nomFr', 'ilike', self), ('prenomFr', 'ilike', self)]"/>
+                <filter name="Proposition_t" string="Proposition Titulation"
+                        domain="[('proposition_titulaire','=',True)]"/>
+                <filter name="Proposition_e" string="Proposition Echlon" domain="[('proposition_echlon','=',True)]"/>
+                <filter name="Proposition_c" string="Proposition Catégorie"
+                        domain="[('proposition_categorie','=',True)]"/>
+                <filter name="Proposition_g" string="Proposition Grade" domain="[('proposition_grade','=',True)]"/>
+
+                <group expand="1" string="Group By">
+                    <filter string="Département" name="département" context="{'group_by':'departement'}"/>
+                    <filter string="Grad" name="grade" context="{'group_by':'grade'}"/>
+                    <filter string="Catégorie" name="catégorie" context="{'group_by':'categorie'}"/>
+                    <filter string="Echelon" name="echelon" context="{'group_by':'echelon'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_personnel_enseignant" model="ir.actions.act_window">
+        <field name="name">Enseignant</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ensaf.enseignant</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Creér un nouveau enseignant !
+            </p>
+        </field>
+
+    </record>
+
+    <menuitem id="rh_menu_enseignant"
+              name="Enseignants"
+              action="action_personnel_enseignant"
+              parent="rh_menu_personnel"
+              sequence="0"/>
+
+</odoo>

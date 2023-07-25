@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rh_indice_view_form" model="ir.ui.view">
+        <field name="name">ensaf.indice.form</field>
+        <field name="model">ensaf.indice</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="grade"></field>
+                        <field name="categorie"></field>
+                        <field name="echelon"></field>
+                        <field name="indice"></field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="rh_indice_view_tree" model="ir.ui.view">
+        <field name="name">ensaf.indice.tree</field>
+        <field name="model">ensaf.indice</field>
+        <field name="arch" type="xml">
+            <tree string="list des Enseifnant">
+                <field name="grade"></field>
+                <field name="categorie"></field>
+                <field name="echelon"></field>
+                <field name="indice"></field>
+            </tree>
+        </field>
+    </record>
+
+    <record id="rh_indice_view_search" model="ir.ui.view">
+        <field name="name">ensaf.indice.search</field>
+        <field name="model">ensaf.indice</field>
+        <field name="arch" type="xml">
+            <search>
+                <group expand="1" string="Group By">
+                    <filter string="Grad" name="grade" context="{'group_by':'grade'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_personnel_indice" model="ir.actions.act_window">
+        <field name="name">indice</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">ensaf.indice</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Creér un nouveau indice !
+            </p>
+        </field>
+
+    </record>
+
+    <menuitem id="rh_menu_indice"
+              name="indices"
+              action="action_personnel_indice"
+              parent="rh_menu_Parametre"
+              sequence="0"/>
+
+</odoo>

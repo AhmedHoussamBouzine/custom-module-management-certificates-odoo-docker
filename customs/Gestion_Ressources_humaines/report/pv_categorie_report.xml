@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="categorie_rapport" model="ir.actions.report">
+        <field name="name">PV Categorie</field>
+        <field name="model">ensaf.enseignant</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">Gestion_Ressources_humaines.categorie_rapport</field>
+        <field name="report_file">Gestion_Ressources_humaines.categorie_rapport</field>
+        <field name="print_report_name">'PV Categorie'</field>
+        <field name="binding_model_id" ref="model_ensaf_enseignant"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="categorie_rapport">
+        <t t-call="web.html_container">
+            <t t-call="Gestion_Ressources_humaines.weblearns_layout">
+                <t t-foreach="docs" t-as="o">
+                    <t t-set="varGrade" t-value="o.get_grad_arab(o.grade)"/>
+                    <t t-set="varCate"
+                       t-value="o.get_categori_arab(o.search_categoriePromo_records(o.grade,o.categorie))"/>
+                </t>
+                <p style="text-align: center; font-weight: bold; font-size: 20px;">المدرسة الوطنية للعلوم التطبيقية بفاس
+                    محضر اجتماع اللجنة العلمية
+                    الخاص بترقية أساتذة التعليم العالي مؤهلين في الدرجة
+                    برسم سنة
+                    <span t-esc="(int(time.strftime('%Y')) - 1)"/>
+                </p>
+                <p style="text-align: justify; direction: rtl;font-size: 16px; ">
+                    بناءا على المرسوم رقم 2-96-793 بتاريخ 11 شوال 1417 موافق 19 فبراير 1997 بمثابة النظام الأساسي
+                    الخاص برجال التعليم الباحثين في التعليم العالي كما وقع تغييره وتتميمه، ولا سيما المادة 14 منه
+                    المحددة لأنساق ترقية الأساتذة الباحثين في الدرجة؛
+                </p>
+                <p style="text-align: justify; direction: rtl; ">
+                    وتطبيقا لمقتضيات المرسوم رقم 2.01.2329 صادر في 22 ربيع الأول 1423 (4 يونيو 2002) بتحديد تأليف
+                    وسير اللجنة العلمية للمؤسسة الجامعية وكذا كيفيات تعيين وانتخاب أعضائها؛
+                </p>
+                <p style="text-align: justify; direction: rtl; ">
+                    اجتمعت اللجنة العلمية للمدرسة الوطنية للعلوم التطبيقية بفاس بتاريخ
+                    <span t-esc="time.strftime('%Y-%m-%d')"/>
+                    ، قصد دراسة ملفات ترشح
+                    <span t-esc="varGrade"/>
+                    مؤهلين العاملين بالمؤسسة، للترقي في الدرجة
+                    <span t-esc="varCate"/>
+                    حسب الأنساق الاستثنائي، السريع والعادي.
+                    وتم حصر الملفات المعروضة على اللجنة للتقييد في جدول الترقي في الدرجة برسم سنة
+                    <span t-esc="(int(time.strftime('%Y')) - 1)"/>
+                    ، كما هو مبين أدناه.
+
+
+                </p>
+                <t t-foreach="docs[0].delete_repition(docs)" t-as="o">
+                    <p style="text-align: justify; direction: rtl; ">
+                        النسق
+                        <span t-esc="o.get_system_arabe(o.system)"/>
+                    </p>
+                    <p style="text-align: justify; direction: rtl; ">
+                        – الترقية من الدرجة –
+                        <span t-esc="o.get_categori_arab(o.categorie)"/>
+                        - إلى الدرجة –
+                        <span t-esc="o.get_categori_arab(o.search_categoriePromo_records(o.grade,o.categorie))"/>
+                        –
+                    </p>
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr style="text-align: center;">
+                                <th>النسق</th>
+                                <th>تاريخ المفعول</th>
+                                <th>الدرجة المقترحة</th>
+                                <th>الاسم والنسب</th>
+                                <th>رقم التأجير</th>
+                                <th>رت</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="o.search_exceptionnel_records(o.grade,o.categorie,o.system)" t-as='record'>
+                                <tr style="text-align: center;">
+                                    <td></td>
+                                    <td>
+                                        <span t-esc="o.change_year(o.dateEffetEchel)"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="o.get_categori_arab(o.search_categoriePromo_records(o.grade,o.categorie))"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="record.nomAr"/>
+                                        <span t-esc="record.prenomAr"/>
+                                    </td>
+                                    <td>
+                                        <span t-esc="record.som"/>
+                                    </td>
+
+                                    <td></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </t>
+            </t>
+        </t>
+
+    </template>
+</odoo>

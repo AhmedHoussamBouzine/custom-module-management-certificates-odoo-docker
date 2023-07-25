@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <menuitem id="rh_menu_RH"
+              name="Gestion du personnel"
+              web_icon="Gestion_Ressources_humaines,static/description/personnel.png"
+              groups="base.group_system"
+              sequence="0"/>
+
+    <menuitem id="rh_menu_personnel"
+              name="Personnels"
+              parent="rh_menu_RH"
+              sequence="0"/>
+
+    <menuitem id="rh_menu_Parametre"
+              name="Parametre"
+              parent="rh_menu_RH"
+              sequence="20"/>
+
+</odoo>
